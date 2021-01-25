@@ -13,7 +13,7 @@ output_dir = os.path.join(current_dir, 'output')
 input_file_path = os.path.join(current_dir, 'input.txt')
 log_file_path = os.path.join(current_dir, 'log.txt')
 
-print('>>>> matrix.py')
+print('>>>> yt-download.py')
 print('>>>> output directory: ', current_dir)
 print('>>>> input file: ', input_file_path)
 
@@ -24,7 +24,7 @@ log_file = open(log_file_path, 'w', encoding='utf-8')
 # download videos
 for url in input_file:
     try:
-        print('... Baixando', url)
+        print('... Downloading', url)
         youtube = YouTube(url)
 
         if youtube.author.endswith(' - Topic'):
@@ -34,8 +34,8 @@ for url in input_file:
 
         youtube.streams.get_audio_only().download(output_dir, name)
     except Exception as e:
-        print('xxxx Erro ao baixar', url, e)
-        log_file.write('xxxx Erro ao baixar' + url)
+        print('xxxx Download error', url, e)
+        log_file.write('xxxx Download error' + url)
 
 # convert to .mp3 and remove .mp4
 for mp4_file in os.listdir(output_dir):
@@ -50,8 +50,8 @@ for mp4_file in os.listdir(output_dir):
             os.remove(mp4_file_path)
     except Exception as e:
         filepath = os.path.join(output_dir, mp4_file)
-        print('xxxx Erro ao converter', filepath, e)
-        log_file.write('xxxx Erro ao converter' + filepath + '\n')
+        print('xxxx Convertion error', filepath, e)
+        log_file.write('xxxx Convertion error' + filepath + '\n')
 
 # close files
 input_file.close()
